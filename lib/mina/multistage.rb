@@ -34,7 +34,7 @@ end
 set :all_stages, _get_all_stages if _all_stages_empty?
 
 fetch(:all_stages).each do |name|
-  desc "Set the target stage to '#{name}'."
+  comment "準備部署 #{name} 環境"
   task(name) do
     set :stage, name
     file = "#{_stages_dir}/#{fetch(:stage)}.rb"
