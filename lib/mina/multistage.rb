@@ -34,7 +34,6 @@ end
 set :all_stages, _get_all_stages if _all_stages_empty?
 
 fetch(:all_stages).each do |name|
-  comment "準備部署 #{name} 環境"
   task(name) do
     set :stage, name
     file = "#{_stages_dir}/#{fetch(:stage)}.rb"
@@ -46,6 +45,7 @@ _potential_stage = ARGV.first
 
 if _stage_file_exists?(_potential_stage) && _argument_included_in_stages?(_potential_stage)
  invoke _potential_stage
+ comment "準備部署 #{_potential_stage} 環境"
 elsif _stage_file_exists?(_default_stage)
  invoke _default_stage
 end
